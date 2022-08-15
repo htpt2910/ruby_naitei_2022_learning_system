@@ -1,4 +1,5 @@
 vi:
-  static_pages:
-    index:
-      title: "Trang quản lý"
+  admin:
+    static_pages:
+      index:
+        title: "Trang quản lý"

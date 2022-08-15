@@ -1,4 +1,5 @@
 en:
-  static_pages:
-    index:
-      title: "Admin Site"
+  admin:
+    static_pages:
+      index:
+        title: "Admin Site"

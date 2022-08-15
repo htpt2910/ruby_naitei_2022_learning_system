@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  #  check neu la admin -> site admin
   include SessionsHelper
   before_action :set_locale
 

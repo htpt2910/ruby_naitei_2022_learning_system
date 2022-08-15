@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   layout "signin", only: %i(new create)
+  # before_action :check_role, only: :handle_signin
 
   def new; end
 
@@ -20,6 +21,7 @@ class SessionsController < ApplicationController
 
   def handle_signin user
     sign_in user
+    # check_role
     flash[:success] = t ".signin_success", user_name: user.name
     params[:session][:remember_me] == "1" ? remember(user) : forget(user)
     redirect_to root_path

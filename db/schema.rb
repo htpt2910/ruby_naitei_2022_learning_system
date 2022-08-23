@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_22_073346) do
+ActiveRecord::Schema.define(version: 2022_08_23_063404) do
 
   create_table "courses", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,37 @@ ActiveRecord::Schema.define(version: 2022_08_22_073346) do
     t.integer "order"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "exam_answers", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "exam_question_id", null: false
+    t.bigint "word_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_question_id", "word_id"], name: "index_exam_answers_on_exam_question_id_and_word_id", unique: true
+    t.index ["exam_question_id"], name: "index_exam_answers_on_exam_question_id"
+    t.index ["word_id"], name: "index_exam_answers_on_word_id"
+  end
+
+  create_table "exam_questions", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "true_answer_id", null: false
+    t.bigint "user_answer_id"
+    t.bigint "exam_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_exam_questions_on_exam_id"
+    t.index ["true_answer_id"], name: "index_exam_questions_on_true_answer_id"
+    t.index ["user_answer_id"], name: "index_exam_questions_on_user_answer_id"
+  end
+
+  create_table "exams", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "lesson_id", null: false
+    t.boolean "is_finished", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lesson_id"], name: "index_exams_on_lesson_id"
+    t.index ["user_id"], name: "index_exams_on_user_id"
   end
 
   create_table "lessons", charset: "utf8mb4", force: :cascade do |t|
@@ -51,6 +82,13 @@ ActiveRecord::Schema.define(version: 2022_08_22_073346) do
     t.index ["lesson_id"], name: "index_words_on_lesson_id"
   end
 
+  add_foreign_key "exam_answers", "exam_questions"
+  add_foreign_key "exam_answers", "words"
+  add_foreign_key "exam_questions", "exams"
+  add_foreign_key "exam_questions", "words", column: "true_answer_id"
+  add_foreign_key "exam_questions", "words", column: "user_answer_id"
+  add_foreign_key "exams", "lessons"
+  add_foreign_key "exams", "users"
   add_foreign_key "lessons", "courses"
   add_foreign_key "words", "lessons"
 end

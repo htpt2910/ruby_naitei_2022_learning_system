@@ -4,11 +4,13 @@ User.create!(name: "Example User",
              password_confirmation: "foobar",
              admin: true)
 
-User.create!(name: "Foobar",
-             email: "foobar@gmail.com",
-             password: "foobar",
-             password_confirmation: "foobar",
-             admin: false)
+20.times.each do |i|
+  User.create!(name: "Foobar #{i}",
+              email: "foobar#{i}@gmail.com",
+              password: "foobar",
+              password_confirmation: "foobar",
+              admin: false)
+end
 
 20.times.each do |i|
   Course.create!(name: "Course N#{i}",

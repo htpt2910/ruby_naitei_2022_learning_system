@@ -1,9 +1,12 @@
 class LessonsController < ApplicationController
-  before_action :set_lesson, only: :show
-  def show; end
+  before_action :load_lesson, only: :show
+  def show
+    @exam = current_user.exams.build
+    @exam.lesson = @lesson
+  end
 
   private
-  def set_lesson
+  def load_lesson
     @lesson = Lesson.find_by id: params[:id]
     return if @lesson.present?
 

@@ -1,0 +1,52 @@
+<template id="users-list-template">
+  <p class="fs-3 font-family-ubuntu d-flex justify-content-center mt-3"><%= t ".list_users" %></p>
+  <div class="card m-4">
+    <div class="card-header">
+      <span><i class="bi bi-table me-2"></i></span>
+      <%= t ".users" %>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          id="users-list-table"
+          class="table table-striped data-table w-100"
+        >
+          <thead>
+            <tr>
+              <%= content_tag :th, t(".id") %>
+              <%= content_tag :th, t(".name") %>
+              <%= content_tag :th, t(".available_courses") %>
+              <%= content_tag :th, t(".passed_courses") %>
+              <%= content_tag :th, t(".delete") %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td>0</td>
+                <td>0</td>
+                <td>
+                  <%= button_to t(".delete"), admin_user_path(user), method: :delete, data: { confirm: t(".confirm") },
+                  class: "btn btn-outline-secondary" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <%= content_tag :th, t(".id") %>
+              <%= content_tag :th, t(".name") %>
+              <%= content_tag :th, t(".available_courses") %>
+              <%= content_tag :th, t(".passed_courses") %>
+              <%= content_tag(:th, t(".delete")) %>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</template>
+
+<users-list></users-list>

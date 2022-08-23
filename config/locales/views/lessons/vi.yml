@@ -3,3 +3,4 @@ vi:
     lesson_not_found: "Khóa học không tồn tại."
     show:
       test: "Kiểm tra"
+      confirm_take_test: "Bạn có chắc chắn muốn làm bài thi cho bài học này?"

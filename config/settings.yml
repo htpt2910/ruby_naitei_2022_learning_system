@@ -18,6 +18,8 @@ pagy:
   max_courses_per_page_12: 12
 word:
   max_length_255: 255
+exam:
+  max_questions_per_exam_40: 40
 admin:
   lesson:
     number_8: 8

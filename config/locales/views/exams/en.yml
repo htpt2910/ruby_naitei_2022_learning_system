@@ -1,0 +1,6 @@
+en:
+  exams:
+    not_found: "Exam not found"
+    create:
+      success: "Good luck and have fun!"
+      fail: "Error creating exam"

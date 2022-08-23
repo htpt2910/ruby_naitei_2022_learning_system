@@ -11,13 +11,15 @@ Rails.application.routes.draw do
 
     resources :users, only: %i(new create)
     resources :courses, only: %i(index show)
-    resources :lessons, only: %i(show)
+    resources :lessons, only: :show
+    resources :exams, except: :destroy
     namespace :admin do
       root to: "static_pages#index"
       resources :static_pages
       resources :courses
       resources :lessons
       resources :words
+      resources :users
     end
   end
 end

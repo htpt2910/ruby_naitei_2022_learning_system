@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :exams, dependent: :destroy
   before_save :downcase_email
   attr_accessor :remember_token
 

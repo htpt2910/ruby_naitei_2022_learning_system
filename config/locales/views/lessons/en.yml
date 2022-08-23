@@ -3,3 +3,4 @@ en:
     lesson_not_found: "Lesson not found."
     show:
       test: "Test"
+      confirm_take_test: "Are you sure you want to take test for this lesson?"

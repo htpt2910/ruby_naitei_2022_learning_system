@@ -18,6 +18,15 @@ class Admin::LessonsController < Admin::BaseController
     redirect_to admin_lesson_path @lesson
   end
 
+  def destroy
+    if @lesson.destroy
+      flash[:success] = t ".lesson_destroy_success"
+    else
+      flash[:error] = t ".lesson_destroy_fail"
+    end
+    redirect_back fallback_location: admin_root_path
+  end
+
   private
   def lesson_params
     params.require(:lesson).permit Lesson::UPDATEDB_ATTRS

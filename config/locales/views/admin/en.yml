@@ -4,6 +4,9 @@ en:
       index:
         title: "Admin Site"
         request_login: "Please login"
+    lessons_list_component:
+      delete: "Delete"
+      confirm: "Are you sure you want to delete this lesson?"
     page:
       courses:
         show_component:
@@ -47,3 +50,6 @@ en:
         lesson_not_exist: "Lesson not exist!"
         lesson: "%{lesson_id}"
         words_list: "Words list"
+      destroy:
+        lesson_destroy_success: "Lesson is destroyed successfully!"
+        lesson_destroy_fail: "Lesson destroy fail!"

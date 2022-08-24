@@ -31,7 +31,7 @@
                     <%= content_tag :td, lesson.created_at %>
                     <%= content_tag :td, lesson.updated_at %>
                     <td>
-                      <%= link_to t(".delete"), '#', method: :delete, data: { confirm: t(".confirm") },
+                      <%= button_to t(".delete"), admin_lesson_path(lesson) , method: :delete, data: { confirm: t(".confirm") },
                       class: "btn btn-outline-secondary" %>
                     </td>
                   </tr>

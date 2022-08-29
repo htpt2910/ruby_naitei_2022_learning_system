@@ -12,10 +12,11 @@ class Admin::LessonsController < Admin::BaseController
   def update
     if @lesson.update lesson_params
       flash[:success] = t ".lesson_update_success"
+      redirect_to admin_lesson_path @lesson
     else
       flash[:error] = t ".lesson_update_fail"
+      render :edit
     end
-    redirect_to admin_lesson_path @lesson
   end
 
   private

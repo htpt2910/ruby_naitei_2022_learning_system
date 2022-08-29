@@ -17,4 +17,10 @@ module ApplicationHelper
       "toastr.info"
     end
   end
+
+  def check_error object, attribute
+    return if object.errors.nil?
+
+    return "border-danger" if object.errors[attribute].present?
+  end
 end

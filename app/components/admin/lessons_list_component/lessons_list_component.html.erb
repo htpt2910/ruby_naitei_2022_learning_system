@@ -28,8 +28,8 @@
                     <td><%= link_to lesson.name, admin_lesson_path(lesson), class: "text-decoration-none text-secondary" %></td>
                     <td><%= lesson.description %></td>
                     <td><%= lesson.course.name %></td>
-                    <%= content_tag :td, lesson.created_at %>
-                    <%= content_tag :td, lesson.updated_at %>
+                    <td><%= l lesson.created_at, format: :short %></td>
+                    <td><%= l lesson.updated_at, format: :short %></td>
                     <td>
                       <%= link_to t(".delete"), '#', method: :delete, data: { confirm: t(".confirm") },
                       class: "btn btn-outline-secondary" %>
@@ -37,16 +37,6 @@
                   </tr>
                 <% end %>
               </tbody>
-              <tfoot>
-                <tr>
-                  <%= content_tag :th, t(".name") %>
-                  <%= content_tag :th, t(".description") %>
-                  <%= content_tag :th, t(".course") %>
-                  <%= content_tag :th, t(".created_at") %>
-                  <%= content_tag :th, t(".updated_at") %>
-                  <%= content_tag :th, t(".delete") %>
-                </tr>
-              </tfoot>
             </table>
           </div>
         </div>

@@ -1,13 +1,14 @@
 <template id="course-form-template">
-  <%= form_with model: [:admin, @course], method: method do |f| %>
+  <%= form_with model: [:admin, @course], remote: true, method: method do |f| %>
+    <% border_color = "" %>
+    <%= render "shared/error_messages", object: f.object %>
     <div class="mb-4">
-      <%= f.label :name, t(".title"), class: "form-label" %>
-      <%= f.text_area :name, class: "form-control course-name" %>
+      <%= f.label :name, t(".name"), class: "form-label" %>
+      <%= f.text_area :name, class: "form-control course-name #{check_error(@course, :name)}" %>
     </div>
-
     <div class="mb-4">
       <%= f.label :description, t(".description"), class: "form-label" %>
-      <%= f.text_area :description, class: "form-control course-description" %>
+      <%= f.text_area :description, class: "form-control course-description #{check_error(@course, :description)}" %>
     </div>
 
     <% if @variant == :create %>
@@ -23,18 +24,19 @@
         <div class="card-body">
           <div id="lessons-group">
             <%= f.fields_for :lessons do |lesson_fields| %>
+              <% render "shared/error_messages", object: lesson_fields.object%>
               <div class="input-group p-2">
                 <%= lesson_fields.label :name, class: "input-group-text" %>
-                <%= lesson_fields.text_field :name, class: "form-control course-name" %>
-                <%= lesson_fields.text_area :description, class: "form-control course-name" %>
+                <%= lesson_fields.text_field :name, class: "form-control" %>
+                <%= lesson_fields.text_area :description, class: "form-control" %>
               </div>
             <% end %>
             <template id="new-lesson-template">
               <%= f.fields_for :lessons, @course.lessons.new, child_index: "new-lesson-template" do |lesson_fields| %>
                 <div class="input-group p-2">
                   <%= lesson_fields.label :name, "#{t(".lesson")} new-lesson-template", class: "input-group-text" %>
-                  <%= lesson_fields.text_field :name, class: "form-control course-name" %>
-                  <%= lesson_fields.text_field :description, class: "form-control course-name" %>
+                  <%= lesson_fields.text_field :name, class: "form-control" %>
+                  <%= lesson_fields.text_field :description, class: "form-control" %>
                 </div>
               <% end %>
             </template>

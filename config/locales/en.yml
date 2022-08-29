@@ -8,3 +8,14 @@ en:
       request_login: "Please login"
   helper:
     title: "Ruby Naitei 2022 Learning System"
+  sessions:
+    new:
+      signin: "Sign in"
+    create:
+      signin_success: "Welcome %{user_name}!"
+      signin_fail: "Invalid email/password! Please try again."
+    find_user:
+      email_not_found: "Email not found!"
+  shared:
+    error_messages:
+      form_contains: "Form contains "

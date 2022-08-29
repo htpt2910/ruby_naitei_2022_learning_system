@@ -1,13 +1,16 @@
 <template id="lesson-form-template">
   <%= form_with model: [:admin, @lesson], method: :put do |f| %>
     <div class="m-4">
+      <%= render "shared/error_messages", object: f.object %>
+    </div>
+    <div class="m-4">
       <%= f.label :name, t(".title"), class: "form-label" %>
-      <%= f.text_area :name, class: "form-control lesson-name" %>
+      <%= f.text_area :name, class: "form-control lesson-name #{check_error(@lesson, :name)}" %>
     </div>
 
     <div class="m-4">
       <%= f.label :description, t(".description"), class: "form-label" %>
-      <%= f.text_area :description, class: "form-control lesson-description" %>
+      <%= f.text_area :description, class: "form-control lesson-description #{check_error(@lesson, :description)}" %>
     </div>
 
       <div class="card mx-4">

@@ -15,8 +15,8 @@
                 class: "me-2"
               ) +
               content_tag(:span, t(".dash_board")),
-              admin_static_pages_path,
-              class: "nav-link px-3 " + (current_page?(admin_static_pages_path) ? "active" : "")
+              root_path,
+              class: "nav-link px-3 " + (current_page?(root_path) ? "active" : "")
             )
           %>
         </li>
@@ -34,7 +34,7 @@
                 class: "me-2"
               ) +
               content_tag(:span, t(".courses")),
-              admin_courses_path,
+              courses_path,
               class: "nav-link px-3 " + (params[:controller] == 'admin/courses' ? "active" : "not-act")
             )
           %>
@@ -46,15 +46,10 @@
           </a>
         </li>
         <li>
-          <%= 
-            link_to(
-              content_tag(:span,
-                content_tag(:i, "", class: "bi bi-spellcheck"),
-                class: "me-2"
-              ) +
-              content_tag(:span, t(".words")),
-              admin_words_path, class: "nav-link px-3")
-          %>
+          <a href="#" class="nav-link px-3">
+            <span class="me-2"><i class="bi bi-spellcheck"></i></span>
+            <%= content_tag :span, t(".words") %>
+          </a>
         </li>
         <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
         <li>
@@ -70,7 +65,7 @@
                 class: "me-2"
               ) +
               content_tag(:span, t(".users")),
-              admin_users_path, class: "nav-link px-3")
+              users_path, class: "nav-link px-3")
           %>
         </li>
         <li>
@@ -81,7 +76,7 @@
                 class: "me-2"
               ) +
               content_tag(:span, t(".exam")),
-              admin_exams_path, class: "nav-link px-3")
+              exams_path, class: "nav-link px-3")
           %>
         </li>
       </ul>

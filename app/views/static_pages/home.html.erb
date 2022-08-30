@@ -1,5 +1,9 @@
 <% provide(:title, t(".homepage")) %>
 
-<h1 class="d-flex justify-content-center"><%= t ".welcome" %></h1>
+<% if current_user.admin? %>
+  <%= render Admin::DashBoardComponent.new %>
+<% else %>
+  <h1 class="d-flex justify-content-center"><%= t ".welcome" %></h1>
 
-<%= render(HomeComponent.new()) %>
+  <%= render(HomeComponent.new) %>
+<% end %>

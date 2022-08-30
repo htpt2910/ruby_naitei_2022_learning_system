@@ -27,10 +27,6 @@ class Admin::WordsListComponent < ViewComponent::Base
   end
 
   def table_data_url
-    if current_user.admin?
-      admin_lesson_words_path @lesson
-    else
-      lesson_words_path @lesson
-    end
+    lesson_words_path @lesson
   end
 end

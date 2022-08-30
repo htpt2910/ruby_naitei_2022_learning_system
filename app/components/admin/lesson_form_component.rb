@@ -2,6 +2,7 @@
 
 class Admin::LessonFormComponent < ViewComponent::Base
   include LessonsHelper
+  include ApplicationHelper
 
   def initialize lesson:
     super

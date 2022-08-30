@@ -1,6 +1,0 @@
-<% provide(:title, t(".word")) %>
-
-<%= render Admin::ContentHeaderComponent.new(title: t(".title"), button: t(".add_lesson"), path: new_admin_word_path) %>
-<div class="d-flex justify-content-center">
-    <%= render Admin::SlideComponent.new(words: @words) %>
-</div>

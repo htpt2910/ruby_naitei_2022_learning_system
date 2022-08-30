@@ -1,5 +1,5 @@
 class BaseController < ApplicationController
-  before_action :guard_admin
+  # before_action :guard_admin
 
   private
 

@@ -4,6 +4,7 @@ git_source(:github){|repo| "https://github.com/#{repo}.git"}
 ruby "3.0.2"
 
 gem "bcrypt", "~> 3.1.7"
+gem "cancancan", "3.4.0"
 gem "config", "~> 4.0.0"
 gem "devise", "~> 4.8.1"
 gem "devise-i18n", "~> 1.10.2"

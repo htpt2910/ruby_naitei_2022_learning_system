@@ -1,5 +1,18 @@
 class ExamsController < BaseController
-  before_action :load_exam, only: %i(show edit update)
+  include ExamsHelper
+  load_and_authorize_resource param_method: :exam_params
+
+  def current_ability
+    @current_ability ||= ExamAbility.new(current_user)
+  end
+
+  def index
+    @exams = if current_user.admin?
+               Exam.all
+             else
+               current_user.exams
+             end
+  end
 
   def new
     @exam = Exam.new
@@ -17,16 +30,12 @@ class ExamsController < BaseController
     end
   end
 
-  def index
-    @exams = current_user.exams
-  end
-
   def show
-    return redirect_to edit_exam_path(@exam) unless @exam.is_finished?
+    return redirect_to edit_exam_path(@exam) unless @exam.is_finished
   end
 
   def edit
-    return redirect_to @exam if @exam.is_finished?
+    return redirect_to @exam if @exam.is_finished
   end
 
   def update
@@ -43,14 +52,6 @@ class ExamsController < BaseController
 
   def exam_params
     params.require(:exam).permit Exam::PERMIT_ATTRIBUTES
-  end
-
-  def load_exam
-    @exam = Exam.find_by id: params[:id]
-    return if @exam
-
-    flash[:error] = t "exams.not_found"
-    redirect_to exams_path
   end
 
   def sample_questions

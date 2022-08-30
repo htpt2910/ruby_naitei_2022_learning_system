@@ -8,10 +8,6 @@ class CourseCardComponent < ViewComponent::Base
   end
 
   def link_to_course
-    if current_user.admin?
-      admin_course_path @course
-    else
-      course_path @course
-    end
+    course_path @course
   end
 end

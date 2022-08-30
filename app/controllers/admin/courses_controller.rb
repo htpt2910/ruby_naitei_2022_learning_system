@@ -30,10 +30,11 @@ class Admin::CoursesController < Admin::BaseController
   def update
     if @course.update course_params
       flash[:success] = t ".course_update_success"
+      redirect_to admin_course_path @course
     else
-      flash[:error] = @course.errors.full_messages
+      flash[:error] = t ".course_update_fail"
+      render :edit
     end
-    redirect_to admin_course_path @course
   end
 
   def destroy

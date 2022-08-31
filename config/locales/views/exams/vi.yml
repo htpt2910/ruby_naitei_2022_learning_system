@@ -6,6 +6,7 @@ vi:
       fail: "Lỗi khi tạo bài thi"
     edit:
       submit: "Nộp bài"
+      confirm: "Bạn có chắc chắn muốn nộp bài ngay bây giờ?"
     update:
       success: "Chúc mừng bạn đã hoàn thành bài thi!"
       fail: "Lỗi khi nộp bài"

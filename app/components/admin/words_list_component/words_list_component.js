@@ -58,7 +58,7 @@ class WordsList extends HTMLElement {
         render: function (data) {
           return `<input type='checkbox' class='form-check-input' ${
             data.user_learn_words_id ? "checked" : ""
-          }>${headers[headers.length - 1]}</input>`;
+          }>`;
         },
       });
     }

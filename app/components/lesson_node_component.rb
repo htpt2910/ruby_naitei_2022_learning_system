@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LessonNodeComponent < ViewComponent::Base
-  include SessionsHelper
+  include Devise::Controllers::Helpers
   def initialize lesson:, classes: ""
     super
     @lesson = lesson

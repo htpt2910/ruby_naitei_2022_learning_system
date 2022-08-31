@@ -1,0 +1,8 @@
+<% if @exam.persisted? %>
+  <% flash[:success] = t ".success" %>
+  window.location.href = '<%= edit_exam_path(@exam) %>';
+<% else %>
+  <% @exam.errors.full_messages.each do |message| %>
+    <%= toastr_flash("warning") %>('<%= message %>');
+  <% end %>
+<% end %>

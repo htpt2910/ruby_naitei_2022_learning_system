@@ -1,18 +1,14 @@
 class UserLearnWordsController < ApplicationController
   def create
-    @user_learn_word = UserLearnWord.new word_id: params[:word_id]
-    @user_learn_word.user = current_user
-    is_success = @user_learn_word.save
-    response = {
-      data: @user_learn_word.as_json(only: [:id, :word_id])
-    }
+    word = Word.find_by id: params[:word_id]
+    if word.nil?
+      respond_to{|format| format.js{render status: :unprocessable_entity}}
+      return
+    end
+    word_association = current_user.learn word
     respond_to do |format|
       format.js do
-        if is_success
-          render json: response
-        else
-          render json: response, status: :unprocessable_entity
-        end
+        render json: {data: word_association.as_json(only: [:id, :word_id])}
       end
     end
   end

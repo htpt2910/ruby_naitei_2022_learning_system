@@ -2,9 +2,15 @@ vi:
   activerecord:
     models:
       user: Người dùng
+      exam: Đề thi
     attributes:
       user:
         name: "Tên"
+    errors:
+      models:
+        exam:
+          already_finished: "Đề thi đã kết thúc"
+          not_learned_all_words: "Bạn chưa học tất cả các từ"
   errors:
     messages:
       must_be_valid_email: "Phải là một địa chỉ email hợp lệ"

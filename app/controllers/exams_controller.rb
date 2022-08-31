@@ -6,15 +6,8 @@ class ExamsController < BaseController
   end
 
   def create
-    @exam = Exam.new exam_params
-    sample_questions
-    if @exam.save
-      flash[:success] = t ".success"
-      redirect_to edit_exam_path(@exam)
-    else
-      flash[:error] = t ".fail"
-      redirect_to @exam.lesson
-    end
+    @exam = Exam.create exam_params.merge user_id: current_user.id
+    respond_to{|format| format.js}
   end
 
   def index
@@ -22,15 +15,15 @@ class ExamsController < BaseController
   end
 
   def show
-    return redirect_to edit_exam_path(@exam) unless @exam.is_finished?
+    return redirect_to edit_exam_path(@exam) unless @exam.finished?
   end
 
   def edit
-    return redirect_to @exam if @exam.is_finished?
+    return redirect_to @exam if @exam.finished?
   end
 
   def update
-    if @exam.update exam_params.merge is_finished: true
+    if @exam.update exam_params
       flash[:success] = t ".success"
       redirect_to exam_path(@exam)
     else
@@ -51,17 +44,5 @@ class ExamsController < BaseController
 
     flash[:error] = t "exams.not_found"
     redirect_to exams_path
-  end
-
-  def sample_questions
-    word_ids = helpers.sample_word_ids_from @exam.lesson
-    word_ids.each do |chosen_word_id|
-      sampled_word_ids = helpers.sample_3_wrong_word_ids word_ids,
-                                                         chosen_word_id
-      exam_question = @exam.exam_questions.build true_answer_id: chosen_word_id
-      sampled_word_ids.each do |sampled_word_id|
-        exam_question.wrong_answers.build word_id: sampled_word_id
-      end
-    end
   end
 end

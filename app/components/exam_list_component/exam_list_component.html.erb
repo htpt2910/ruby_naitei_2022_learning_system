@@ -27,7 +27,7 @@
                 <td><%= exam.lesson_name %></td>
                 <td><%= l exam.created_at, format: :short %></td>
                 <td><%= l exam.updated_at, format: :short %></td>
-                <td><%= exam.is_finished ? t(".finished") : t(".not_finish") %></td>
+                <td><%= exam.finished? ? t(".finished") : t(".not_finish") %></td>
                 <td>
                   <%= button_to t(".check"), exam_path(exam), method: :get, class: "btn btn-outline-secondary" %>
                 </td>

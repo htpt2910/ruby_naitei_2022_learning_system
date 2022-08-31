@@ -6,6 +6,7 @@ en:
       fail: "Error creating exam"
     edit:
       submit: "Submit"
+      confirm: "Are you sure you want to finish this exam now?"
     update:
       success: "Well done!"
       fail: "Error submitting exam"

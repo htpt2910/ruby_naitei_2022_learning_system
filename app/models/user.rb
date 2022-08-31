@@ -7,10 +7,20 @@ class User < ApplicationRecord
   has_many :word_associations, class_name: UserLearnWord.name,
                                dependent: :destroy
   has_many :learned_words, through: :word_associations, source: :word
-  has_many :lesson_accomplishments, dependent: :destroy
-  has_many :completed_lessons, through: :lesson_accomplishments, source: :lesson
-  before_save :downcase_email
-  attr_accessor :remember_token
+  has_many :learning_lesson_accomplishments,
+           ->{where status: :learning},
+           class_name: LessonAccomplishment.name,
+           dependent: :destroy
+  has_many :learning_lessons,
+           through: :learning_lesson_accomplishments,
+           source: :lesson
+  has_many :completed_lesson_accomplishments,
+           ->{where status: :completed},
+           class_name: LessonAccomplishment.name,
+           dependent: :destroy
+  has_many :completed_lessons,
+           through: :completed_lesson_accomplishments,
+           source: :lesson
 
   validates :name, presence: true,
                    length: {maximum: Settings.user.name_max_length}
@@ -26,44 +36,18 @@ class User < ApplicationRecord
 
   scope :learners, ->{where(admin: false)}
 
-  class << self
-    def digest string
-      cost = if ActiveModel::SecurePassword.min_cost
-               BCrypt::Engine::MIN_COST
-             else
-               BCrypt::Engine.cost
-             end
-
-      BCrypt::Password.create(string, cost: cost)
-    end
-
-    def new_token
-      SecureRandom.urlsafe_base64
-    end
-  end
-
-  def remember
-    self.remember_token = User.new_token
-    update_attribute :remember_digest, User.digest(remember_token)
-  end
-
-  def authenticated? remember_token
-    return false unless remember_digest
-
-    BCrypt::Password.new(remember_digest).is_password? remember_token
-  end
-
-  def forget
-    update_attribute(:remember_digest, nil)
+  def learn word
+    word_associations.create word: word
+    learning_lessons << word.lesson
+  rescue ActiveRecord::RecordNotUnique
+    word_associations.find_by word: word
   end
 
   def learned? word
     learned_words.include? word
   end
 
-  private
-
-  def downcase_email
-    email.downcase!
+  def learning_courses
+    Course.where id: learning_lessons.pluck(:course_id)
   end
 end

@@ -31,6 +31,10 @@ class Lesson < ApplicationRecord
     test_completed_by? user
   end
 
+  def sample_word_ids number_of_words
+    words.pluck(:id).sample(number_of_words)
+  end
+
   private
   def reject_word word_attrs
     word_attrs[:definition].blank?

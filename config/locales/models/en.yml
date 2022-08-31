@@ -2,9 +2,15 @@ en:
   activerecord:
     models:
       user: User
+      exam: Exam
     attributes:
       user:
         name: "Name"
+    errors:
+      models:
+        exam:
+          already_finished: "Exam has already finished"
+          not_learned_all_words: "You haven't learned all words"
   errors:
     messages:
       must_be_valid_email: "Must be a valid email address"

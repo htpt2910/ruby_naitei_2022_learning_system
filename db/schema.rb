@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_28_110122) do
+ActiveRecord::Schema.define(version: 2022_08_30_064958) do
 
   create_table "courses", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 2022_08_28_110122) do
   create_table "exams", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "lesson_id", null: false
-    t.boolean "is_finished", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "score"
     t.index ["lesson_id"], name: "index_exams_on_lesson_id"
     t.index ["user_id"], name: "index_exams_on_user_id"
   end
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2022_08_28_110122) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
+    t.index ["lesson_id", "user_id"], name: "index_lesson_accomplishments_on_lesson_id_and_user_id", unique: true
     t.index ["lesson_id"], name: "index_lesson_accomplishments_on_lesson_id"
     t.index ["user_id"], name: "index_lesson_accomplishments_on_user_id"
   end
@@ -76,6 +78,7 @@ ActiveRecord::Schema.define(version: 2022_08_28_110122) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_learn_words_on_user_id"
+    t.index ["word_id", "user_id"], name: "index_user_learn_words_on_word_id_and_user_id", unique: true
     t.index ["word_id"], name: "index_user_learn_words_on_word_id"
   end
 

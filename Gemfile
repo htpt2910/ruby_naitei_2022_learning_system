@@ -35,6 +35,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "bullet", "~> 7.0.3"
   gem "guard-compat", "~> 1.2.1"
   gem "guard-rspec", require: false
   gem "listen", "~> 3.3"

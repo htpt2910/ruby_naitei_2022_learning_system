@@ -28,21 +28,12 @@
                 <td>0</td>
                 <td>0</td>
                 <td>
-                  <%= button_to t(".delete"), admin_user_path(user), method: :delete, data: { confirm: t(".confirm") },
+                  <%= button_to t(".delete"), user_path(user), method: :delete, data: { confirm: t(".confirm") },
                   class: "btn btn-outline-secondary" %>
                 </td>
               </tr>
             <% end %>
           </tbody>
-          <tfoot>
-            <tr>
-              <%= content_tag :th, t(".id") %>
-              <%= content_tag :th, t(".name") %>
-              <%= content_tag :th, t(".available_courses") %>
-              <%= content_tag :th, t(".passed_courses") %>
-              <%= content_tag(:th, t(".delete")) %>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </div>

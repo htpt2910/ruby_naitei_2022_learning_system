@@ -25,7 +25,7 @@
               <tbody>
                 <% @lessons.each do |lesson| %>
                   <tr>
-                    <td><%= link_to lesson.name, admin_lesson_path(lesson), class: "text-decoration-none text-secondary" %></td>
+                    <td><%= link_to lesson.name, lesson_path(lesson), class: "text-decoration-none text-secondary" %></td>
                     <td><%= lesson.description %></td>
                     <td><%= lesson.course.name %></td>
                     <td><%= l lesson.created_at, format: :short %></td>

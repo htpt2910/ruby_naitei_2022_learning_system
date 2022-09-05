@@ -1,16 +1,34 @@
 class LessonsController < ApplicationController
-  before_action :load_lesson, only: :show
+  load_and_authorize_resource param_method: :lesson_params
+
+  def current_ability
+    @current_ability ||= LessonAbility.new(current_user)
+  end
+
+  def index
+    @lessons = Lesson.all
+  end
+
   def show
+    return unless cannot? :update, @exam
+
     @exam = current_user.exams.build
     @exam.lesson = @lesson
   end
 
-  private
-  def load_lesson
-    @lesson = Lesson.find_by id: params[:id]
-    return if @lesson.present?
+  def edit; end
 
-    flash[:error] = t "lessons.lesson_not_found"
-    redirect_to root_path
+  def update
+    if @lesson.update lesson_params
+      flash[:success] = t ".lesson_update_success"
+      redirect_to lesson_path @lesson
+    else
+      flash[:error] = t ".lesson_update_fail"
+      render :edit
+    end
+  end
+
+  def lesson_params
+    params.require(:lesson).permit Lesson::UPDATEDB_ATTRS
   end
 end

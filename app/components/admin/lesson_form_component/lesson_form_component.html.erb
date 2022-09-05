@@ -1,5 +1,8 @@
 <template id="lesson-form-template">
-  <%= form_with model: [:admin, @lesson], method: :put do |f| %>
+  <%= form_with model: @lesson, method: :put do |f| %>
+    <div class="m-4">
+      <%= render "shared/error_messages", object: f.object %>
+    </div>
     <div class="m-4">
       <%= render "shared/error_messages", object: f.object %>
     </div>

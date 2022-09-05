@@ -1,4 +1,8 @@
 <%= content_tag :h1, @course.name %>
-<div class="d-flex justify-content-center">
-  <%= render CourseMapComponent.new(lessons: @course.lessons) %>
-</div>
+<% if can? :update, @course %>
+  <%= render Admin::Page::Courses::ShowComponent.new course: @course %>
+<% else %>
+  <div class="d-flex justify-content-center">
+    <%= render CourseMapComponent.new(lessons: @course.lessons) %>
+  </div>
+<% end %>

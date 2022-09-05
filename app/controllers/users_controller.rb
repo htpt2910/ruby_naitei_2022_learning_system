@@ -1,4 +1,4 @@
-class Admin::UsersController < Admin::BaseController
+class UsersController < ApplicationController
   before_action :find_user, only: %i(show destroy)
 
   def index
@@ -14,7 +14,7 @@ class Admin::UsersController < Admin::BaseController
       flash[:error] = t ".fail"
     end
 
-    redirect_to admin_users_path
+    redirect_to users_path
   end
 
   def find_user
@@ -22,6 +22,6 @@ class Admin::UsersController < Admin::BaseController
     return if @user
 
     flash[:error] = t "admin.users.not_found"
-    redirect_to admin_users_path
+    redirect_to users_path
   end
 end

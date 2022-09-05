@@ -1,5 +1,5 @@
 <template id="course-form-template">
-  <%= form_with model: [:admin, @course], remote: true, method: method do |f| %>
+  <%= form_with model: @course, remote: true, method: method do |f| %>
     <% border_color = "" %>
     <%= render "shared/error_messages", object: f.object %>
     <div class="mb-4">

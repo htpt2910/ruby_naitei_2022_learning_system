@@ -2,6 +2,7 @@
 
 class LessonNodeComponent < ViewComponent::Base
   include Devise::Controllers::Helpers
+
   def initialize lesson:, classes: ""
     super
     @lesson = lesson

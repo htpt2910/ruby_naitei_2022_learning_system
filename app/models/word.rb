@@ -1,6 +1,7 @@
 class Word < ApplicationRecord
   belongs_to :lesson
   has_many :user_learn_words, dependent: :destroy
+  WORD_ATTRS = [:definition, :translation].freeze
 
   validates :definition, :translation, presence: true,
   length: {maximum: Settings.word.max_length_255}

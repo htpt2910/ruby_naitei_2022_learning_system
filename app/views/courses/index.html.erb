@@ -1,13 +1,28 @@
-<% if @courses.empty? %>
-  <%= content_tag(:p, t(".no_courses")) %>
-<% else %>
-  <div class="w-100 pt-3 pe-5 d-flex justify-content-end">
-    <%= search_form_for @search_query do |f| %>
-      <div class="input-group">
-        <%= f.search_field :name_or_description_cont, class:"form-control" %>
-        <%= f.submit class:"btn btn-primary" %>
-      </div>
-    <% end %>
+<% if can? :update, Course %>
+  <div class="font-family-montserrat">
+    <%= render Admin::ContentHeaderComponent.new(title: t(".title"), button: t(".add_course"), path: new_course_path) %>
+    <div class="w-100 pe-5 d-flex justify-content-end">
+      <%= search_form_for @search_query do |f| %>
+        <div class="input-group">
+          <%= f.search_field :name_or_description_cont, class:"form-control" %>
+          <%= f.submit class:"btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <%= render Admin::CourseComponent.new(courses: @courses, pagy: @pagy) %>
   </div>
-  <%= render(CourseCardsGridComponent.new(courses: @courses, pagy: @pagy)) %>
+<% else %>
+  <% if @courses.empty? %>
+    <%= content_tag(:p, t(".no_courses")) %>
+  <% else %>
+    <div class="w-100 pt-3 pe-5 d-flex justify-content-end">
+      <%= search_form_for @search_query do |f| %>
+        <div class="input-group">
+          <%= f.search_field :name_or_description_cont, class:"form-control" %>
+          <%= f.submit class:"btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <%= render(CourseCardsGridComponent.new(courses: @courses, pagy: @pagy)) %>
+  <% end %>
 <% end %>

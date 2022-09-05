@@ -1,14 +1,18 @@
 <% provide(:title, t(".homepage")) %>
 
-<h1 class="d-flex justify-content-center"><%= t ".welcome" %></h1>
+<% if current_user.admin? %>
+  <%= render Admin::DashBoardComponent.new %>
+<% else %>
+  <h1 class="d-flex justify-content-center"><%= t ".welcome" %></h1>
 
-<p class="home-cheering"><%= t ".hello" %></p>
-<div class="w-100 pt-3 pe-5 d-flex justify-content-end">
-  <%= search_form_for @search_query, url: root_path do |f| %>
-    <div class="input-group">
-      <%= f.search_field :name_or_description_cont, class:"form-control" %>
-      <%= f.submit class:"btn btn-primary" %>
-    </div>
-  <% end %>
-</div>
-<%= render(CourseCardsGridComponent.new(courses: @courses, pagy: @pagy)) %>
+  <p class="home-cheering"><%= t ".hello" %></p>
+  <div class="w-100 pt-3 pe-5 d-flex justify-content-end">
+    <%= search_form_for @search_query, url: root_path do |f| %>
+      <div class="input-group">
+        <%= f.search_field :name_or_description_cont, class:"form-control" %>
+        <%= f.submit class:"btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+  <%= render(CourseCardsGridComponent.new(courses: @courses, pagy: @pagy)) %>
+<% end %>
